@@ -23,20 +23,19 @@ export const login = async (req: Request, res: Response) => {
       { username: user.username },
       process.env.JWT_SECRET!,
       {
-        expiresIn: "1h", // adjust expiration as needed
+        expiresIn: "1h",
       }
     );
 
-    res.json({ token });
+    return res.json({ token });
   } catch (error) {
     console.error("[LOGIN ERROR]", error);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
 const router = Router();
 
-// POST /login - Login a user
 router.post("/login", login);
 
 export default router;
